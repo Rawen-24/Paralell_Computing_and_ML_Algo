@@ -47,6 +47,8 @@ int main()
     initialize_weights(&w_hidden_output[0][0], HIDDEN_NEURONS * OUTPUT_NEURONS);
 
     // Training loop
+
+    //Input->Hidden
     for (int epoch = 0; epoch < EPOCHS; epoch++)
     {
         for (int i = 0; i < TRAINING_SAMPLES; i++)
@@ -62,4 +64,27 @@ int main()
             }
         }
     }
+
+    // Hidden -> Output 
+    double out1[HIDDEN_NEURONS]; 
+    double out[HIDDEN_NEURONS];
+
+    for(int i = 0; i< OUTPUT_NEURONS;i++){
+        out1[i]= 0.0;
+        for(int j = 0 ; j< HIDDEN_NEURONS; j++){
+            out1[i] += hidden[j]*w_hidden_output[j][i]
+        }
+        out[i]=sigmoid(out1[i])
+    }
+
+
+    // ===== Backpropagation =====
+
+    // Output layer errors and deltas
+    double out_error[OUTPUT_NEURONS];
+    double out_delta[OUTPUT_NEURONS];
+        for (int j = 0; j < OUTPUT_NEURONS; j++) {
+            out_error[j] = output[i][j] - out[j];
+            out_delta[j] = out_error[j] * sigmoid_derivative(out[j]);
+        }
 }
