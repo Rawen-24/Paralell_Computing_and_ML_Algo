@@ -1,0 +1,2 @@
+I still need to verify the loops, since it’s difficult to catch errors, especially with so many nested loops and when adjusting the code from paper to VSCode. 
+I also forgot to add the bias as a 1D array, which affects the final result. There should be biases in both the hidden and output layers, so these must be added.
